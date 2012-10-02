@@ -47,7 +47,7 @@ def normalizeTransitionMap(tMap, partition) {
     
 }
 
-def NUM_SAMPLES = 5000
+def NUM_SAMPLES = 10000
 def LENGTH_SAMPLE = 50
 
 def x0 = Math.random()
@@ -83,17 +83,26 @@ def pB2 = ["start" : 0.25, "end" : 0.74999999, "symbol" : 'B']
 def pC2 = ["start" : 0.75, "end" : 1.0, "symbol" : 'C']
 def partitions2 = [pA2, pB2, pC2]
 
+def pA3 = ["start" : 0.0, "end" : 0.24999999, "symbol" : 'A']
+def pB3 = ["start" : 0.25, "end" : 0.4999999, "symbol" : 'B']
+def pC3 = ["start" : 0.5, "end" : 0.7499999, "symbol" : 'C']
+def pD3 = ["start" : 0.75, "end" : 1.0, "symbol" : 'D']
+def partitions3 = [pA3, pB3, pC3, pD3]
+
 def tMap1 = [:]
 def tMap2 = ["AA":0, "AB":0, "AC":0, "BA":0, "BB":0, "BC":0, "CA":0, "CB":0, "CC":0] 
+def tMap3 = ["AA":0, "AB":0, "AC":0, "AD":0, "BA":0, "BB":0, "BC":0, "BD":0, "CA":0, "CB":0, "CC":0, "CD":0, "DA":0, "DB":0, "DC":0, "DD":0] 
 
 samples.each { sample ->
     def partition1String = ""
     def partition2String = ""
+    def partition3String = ""
     
     sample.each{ value ->
 
     partition1String += partitionSymbol(value, partitions1)
     partition2String += partitionSymbol(value, partitions2)
+    partition3String += partitionSymbol(value, partitions3)
     
    
     }
@@ -101,8 +110,12 @@ samples.each { sample ->
    //println "2 : " + partition2String
    //println ""
    
+   //println "3 : " + partition3String
+   //println ""
+   
    tMap1 = buildTransitionMap(partition1String, tMap1)
    tMap2 = buildTransitionMap(partition2String, tMap2)
+   tMap3 = buildTransitionMap(partition3String, tMap3)
    
    
 }
@@ -111,3 +124,5 @@ println ""
 println normalizeTransitionMap(tMap1, partitions1)
 println ""
 println normalizeTransitionMap(tMap2, partitions2)
+println ""
+println normalizeTransitionMap(tMap3, partitions3)
